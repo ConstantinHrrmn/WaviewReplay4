@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AForge.Video.DirectShow;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,5 +31,21 @@ namespace WaviewReplay4
         {
             this.MC = new MainController(this);
         }
+
+        public void UpdateInputComboBoxes(FilterInfoCollection infos)
+        {
+            this.UpdateComboBox(infos, cmbInput1);
+            this.UpdateComboBox(infos, cmbInput2);
+            this.UpdateComboBox(infos, cmbInput3);
+            this.UpdateComboBox(infos, cmbInput4);
+        }
+
+        public void UpdateComboBox(FilterInfoCollection infos, ComboBox cmb)
+        {
+            cmb.Items.Clear();
+            foreach (FilterInfo item in infos)
+                cmb.Items.Add(item.Name);
+        }
+
     }
 }

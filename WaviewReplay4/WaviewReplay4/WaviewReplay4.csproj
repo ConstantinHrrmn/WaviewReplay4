@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LiveInput.cs" />
+    <Compile Include="Controllers\LiveInput.cs" />
     <Compile Include="Models\Buffer.cs" />
     <Compile Include="Views\FrmMain.cs">
       <SubType>Form</SubType>
