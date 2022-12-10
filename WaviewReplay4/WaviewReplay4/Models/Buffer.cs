@@ -15,8 +15,10 @@ namespace WaviewReplay4
         private int _fPS;
         private int _timeInSeconds;
         private int _frames;
+        private int _compressionRatio;
+        
         private bool _running;
-
+        
         private List<Bitmap> _compressedImages;
         private List<Bitmap> _images;
         #endregion
@@ -24,6 +26,7 @@ namespace WaviewReplay4
         #region Constantes publiques
         public static int DEFAULT_FPS = 25;
         public static int DEFAULT_TIME = 8;
+        public static int DEFAULT_COMPRESSION_RATIO = 4;
         #endregion
 
         #region Variables publiques
@@ -33,6 +36,7 @@ namespace WaviewReplay4
         public List<Bitmap> CompressedImages { get => _compressedImages; set => _compressedImages = value; }
         public List<Bitmap> Images { get => _images; set => _images = value; }
         public bool Running { get => _running; set => _running = value; }
+        public int CompressionRatio { get => _compressionRatio; set => _compressionRatio = value; }
         #endregion
 
         #endregion
@@ -44,6 +48,7 @@ namespace WaviewReplay4
         {
             this.FPS = DEFAULT_FPS;
             this.TimeInSeconds = DEFAULT_TIME;
+            this.CompressionRatio = DEFAULT_COMPRESSION_RATIO;
             this.Running = false;
 
             this.Frames = this.FPS * this.TimeInSeconds;
@@ -67,7 +72,7 @@ namespace WaviewReplay4
 
                 // On ajoute l'image au buffer
                 this.Images.Add(Frame);
-                this.CompressedImages.Add(new Bitmap(Frame, new Size(Frame.Width, Frame.Height)));
+                this.CompressedImages.Add(new Bitmap(Frame, new Size(Frame.Width/this.CompressionRatio, Frame.Height/this.CompressionRatio)));
             }
         }
 

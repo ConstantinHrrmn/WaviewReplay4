@@ -10,6 +10,9 @@ namespace WaviewReplay4
     {
         #region Variables privées
         private FrmMain _frame;
+
+        private List<LiveInput> LI;
+
         #endregion
 
         #region Variable publiques
@@ -23,6 +26,20 @@ namespace WaviewReplay4
         public MainController(FrmMain a_frame)
         {
             this.Frame = a_frame;
+
+            this.LI = new List<LiveInput>();
+            
+            this.LI.Add(new LiveInput());
+            this.LI.Add(new LiveInput());
+            this.LI.Add(new LiveInput());
+            this.LI.Add(new LiveInput());
         }
+        
+        public void SetInput(int indexInput, int indexView)
+        {
+            
+        }
+
+        
     }
 }
