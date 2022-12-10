@@ -32,23 +32,34 @@ namespace WaviewReplay4
         {
             this.Frame = a_frame;
 
+            
+
+            this.SetupLiveInputs();
+            this.InstantiateInputs();
+        }
+
+        public void SetupLiveInputs()
+        {
             this.LI = new List<LiveInput>();
             
-            this.LI.Add(new LiveInput());
-            this.LI.Add(new LiveInput());
-            this.LI.Add(new LiveInput());
-            this.LI.Add(new LiveInput());
+            this.LI.Add(new LiveInput(0));
+            this.LI.Add(new LiveInput(1));
+            this.LI.Add(new LiveInput(2));
+            this.LI.Add(new LiveInput(3));
 
-            this.InstantiateInputs();
+            this.LI[0].Callback = this.Frame.UpdateLive;
+            this.LI[1].Callback = this.Frame.UpdateLive;
+            this.LI[2].Callback = this.Frame.UpdateLive;
+            this.LI[3].Callback = this.Frame.UpdateLive;
         }
 
         /// <summary>
         /// Permet de charger toutes les instances d'entrées vidéo de l'oirdinateur
         /// </summary>
-        public void InstantiateInputs()
+        public FilterInfoCollection InstantiateInputs()
         {
             this.FilterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            this.Frame.UpdateInputComboBoxes(this.FilterInfoCollection);
+            return this.FilterInfoCollection;
         }    
 
         /// <summary>
@@ -59,9 +70,11 @@ namespace WaviewReplay4
         public void SetInput(int indexInput, int indexView)
         {
             if (indexView >= 0 && indexView < this.LI.Count)
-                this.LI[indexView].InputDevice = new VideoCaptureDevice(this.FilterInfoCollection[indexInput].MonikerString);
+            {
+                this.LI[indexView].Stop();
+                this.LI[indexView].SetInputDevice(new VideoCaptureDevice(this.FilterInfoCollection[indexInput].MonikerString));
+                this.LI[indexView].Start();
+            }
         }
-
-        
     }
 }

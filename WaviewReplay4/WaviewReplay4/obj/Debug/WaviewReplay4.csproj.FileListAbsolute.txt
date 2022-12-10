@@ -16,3 +16,4 @@ C:\Users\Constantin\Documents\GitHub\WaviewReplay4\WaviewReplay4\WaviewReplay4\b
 C:\Users\Constantin\Documents\GitHub\WaviewReplay4\WaviewReplay4\WaviewReplay4\bin\Debug\AForge.Video.xml
 C:\Users\Constantin\Documents\GitHub\WaviewReplay4\WaviewReplay4\WaviewReplay4\bin\Debug\AForge.Video.DirectShow.xml
 C:\Users\Constantin\Documents\GitHub\WaviewReplay4\WaviewReplay4\WaviewReplay4\obj\Debug\WaviewReplay4.csproj.CopyComplete
+C:\Users\Constantin\Documents\GitHub\WaviewReplay4\WaviewReplay4\WaviewReplay4\obj\Debug\WaviewReplay4.InputSettings.resources

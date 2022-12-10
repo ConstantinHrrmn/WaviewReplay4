@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,30 +14,37 @@ namespace WaviewReplay4
     public class LiveInput
     {
         #region Variables privées
+        private int _index;
+        private Action<Bitmap, int> _callback;
         private VideoCaptureDevice _inputDevice;
-        private PictureBox _pbReplay;
         private Buffer _buff;
         #endregion
 
         #region Variables publiques
         public VideoCaptureDevice InputDevice { get => _inputDevice; set => _inputDevice = value; }
-        public PictureBox PbReplay { get => _pbReplay; set => _pbReplay = value; }
         public Buffer Buffer { get => _buff; set => _buff = value; }
+        public int Index { get => _index; set => _index = value; }
+        public Action<Bitmap, int> Callback { get => _callback; set => _callback = value; }
         #endregion
 
-        public LiveInput(VideoCaptureDevice vcd, PictureBox pb)
+        public LiveInput(VideoCaptureDevice vcd)
         {
-            this.PbReplay = pb;
-
             this.InputDevice = vcd;
             this.InputDevice.NewFrame += new_frame;
             
             this.Buffer = new Buffer();
         }
 
-        public LiveInput()
+        public LiveInput(int index)
         {
+            this.Index = index;
             this.Buffer = new Buffer();
+        }
+
+        public void SetInputDevice(VideoCaptureDevice vcd)
+        {
+            this.InputDevice = vcd;
+            this.InputDevice.NewFrame += new_frame;
         }
 
         #region Input device
@@ -54,7 +62,11 @@ namespace WaviewReplay4
         /// </summary>
         public void Stop()
         {
-            this.InputDevice.Stop();
+            if (this.InputDevice != null)
+            {
+                if (this.InputDevice.IsRunning)
+                    this.InputDevice.Stop();
+            }
         }  
 
         /// <summary>
@@ -64,8 +76,7 @@ namespace WaviewReplay4
         {
             Bitmap image = (Bitmap)eventArgs.Frame;
             this.Buffer.AddFrame(image);
-
-            this.PbReplay.Invoke(new Action(() => this.PbReplay.Image = image));
+            this.Callback(image, this.Index);
         }
 
         #endregion

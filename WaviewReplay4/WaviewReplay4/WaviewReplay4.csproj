@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LiveInput.cs" />
+    <Compile Include="Views\InputSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\InputSettings.Designer.cs">
+      <DependentUpon>InputSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Buffer.cs" />
     <Compile Include="Views\FrmMain.cs">
       <SubType>Form</SubType>
@@ -78,6 +84,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\InputSettings.resx">
+      <DependentUpon>InputSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
