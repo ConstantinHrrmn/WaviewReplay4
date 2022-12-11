@@ -63,18 +63,27 @@ namespace WaviewReplay4
         private void cmbInput1_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Callback(cmbInput1.SelectedIndex, 0);
+            this.lblInfo1.Text = this.InputStringFormater(new VideoCaptureDevice(this.Fic[cmbInput1.SelectedIndex].MonikerString));
         }
         private void cmbInput2_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Callback(cmbInput2.SelectedIndex, 1);
+            this.lblInfo2.Text = this.InputStringFormater(new VideoCaptureDevice(this.Fic[cmbInput2.SelectedIndex].MonikerString));
         }
         private void cmbInput3_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Callback(cmbInput3.SelectedIndex, 2);
+            this.lblInfo3.Text = this.InputStringFormater(new VideoCaptureDevice(this.Fic[cmbInput3.SelectedIndex].MonikerString));
         }
         private void cmbInput4_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Callback(cmbInput4.SelectedIndex, 3);
+            this.lblInfo4.Text = this.InputStringFormater(new VideoCaptureDevice(this.Fic[cmbInput4.SelectedIndex].MonikerString));
+        }
+
+        public string InputStringFormater(VideoCaptureDevice vcd)
+        {
+            return string.Format("{0}x{1} {2}fps", vcd.VideoCapabilities[0].FrameSize.Width, vcd.VideoCapabilities[0].FrameSize.Height, vcd.VideoCapabilities[0].AverageFrameRate);
         }
         #endregion
     }

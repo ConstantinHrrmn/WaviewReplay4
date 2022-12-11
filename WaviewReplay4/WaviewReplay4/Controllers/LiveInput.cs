@@ -18,6 +18,7 @@ namespace WaviewReplay4
         private Action<Bitmap, int> _callback;
         private VideoCaptureDevice _inputDevice;
         private Buffer _buff;
+        private bool _firstFrame;
         #endregion
 
         #region Variables publiques
@@ -43,6 +44,7 @@ namespace WaviewReplay4
 
         public void SetInputDevice(VideoCaptureDevice vcd)
         {
+            this._firstFrame = true;
             this.InputDevice = vcd;
             this.InputDevice.NewFrame += new_frame;
         }
@@ -75,8 +77,11 @@ namespace WaviewReplay4
         private void new_frame(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap image = (Bitmap)eventArgs.Frame;
-            this.Buffer.AddFrame(image);
-            this.Callback(image, this.Index);
+            Bitmap Compressed = new Bitmap(image, Buffer.DISPLAY_SIZE);
+            
+            this.Buffer.AddFrame(image, Compressed);
+            this.Callback(Compressed, this.Index);
+            GC.Collect();
         }
 
         #endregion
@@ -97,6 +102,16 @@ namespace WaviewReplay4
         public void StopBuffer()
         {
             this.Buffer.Stop();
+        }
+
+        public Tuple<int, float> GetBufferProgress()
+        {
+            return new Tuple<int, float>(this.Buffer.Images.Count, this.Buffer.SecondsInBuffer());
+        }
+
+        public void SetOutputSettings(Size Resolution, int FPS)
+        {
+            this.Buffer.SetOutputSettings(Resolution, FPS);
         }
 
         #endregion

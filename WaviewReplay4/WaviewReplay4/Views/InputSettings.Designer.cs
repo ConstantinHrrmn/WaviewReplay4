@@ -36,6 +36,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblInfo1 = new System.Windows.Forms.Label();
+            this.lblInfo2 = new System.Windows.Forms.Label();
+            this.lblInfo3 = new System.Windows.Forms.Label();
+            this.lblInfo4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmbInput4
@@ -125,12 +129,60 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Input 1";
             // 
+            // lblInfo1
+            // 
+            this.lblInfo1.Font = new System.Drawing.Font("Arial Narrow", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo1.ForeColor = System.Drawing.Color.White;
+            this.lblInfo1.Location = new System.Drawing.Point(665, 23);
+            this.lblInfo1.Name = "lblInfo1";
+            this.lblInfo1.Size = new System.Drawing.Size(249, 40);
+            this.lblInfo1.TabIndex = 16;
+            this.lblInfo1.Text = "-";
+            this.lblInfo1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblInfo2
+            // 
+            this.lblInfo2.Font = new System.Drawing.Font("Arial Narrow", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo2.ForeColor = System.Drawing.Color.White;
+            this.lblInfo2.Location = new System.Drawing.Point(665, 99);
+            this.lblInfo2.Name = "lblInfo2";
+            this.lblInfo2.Size = new System.Drawing.Size(249, 40);
+            this.lblInfo2.TabIndex = 17;
+            this.lblInfo2.Text = "-";
+            this.lblInfo2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblInfo3
+            // 
+            this.lblInfo3.Font = new System.Drawing.Font("Arial Narrow", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo3.ForeColor = System.Drawing.Color.White;
+            this.lblInfo3.Location = new System.Drawing.Point(665, 176);
+            this.lblInfo3.Name = "lblInfo3";
+            this.lblInfo3.Size = new System.Drawing.Size(249, 40);
+            this.lblInfo3.TabIndex = 18;
+            this.lblInfo3.Text = "-";
+            this.lblInfo3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblInfo4
+            // 
+            this.lblInfo4.Font = new System.Drawing.Font("Arial Narrow", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo4.ForeColor = System.Drawing.Color.White;
+            this.lblInfo4.Location = new System.Drawing.Point(665, 250);
+            this.lblInfo4.Name = "lblInfo4";
+            this.lblInfo4.Size = new System.Drawing.Size(249, 40);
+            this.lblInfo4.TabIndex = 19;
+            this.lblInfo4.Text = "-";
+            this.lblInfo4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // InputSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(168F, 168F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(926, 316);
+            this.Controls.Add(this.lblInfo4);
+            this.Controls.Add(this.lblInfo3);
+            this.Controls.Add(this.lblInfo2);
+            this.Controls.Add(this.lblInfo1);
             this.Controls.Add(this.cmbInput4);
             this.Controls.Add(this.cmbInput3);
             this.Controls.Add(this.cmbInput2);
@@ -158,5 +210,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblInfo1;
+        private System.Windows.Forms.Label lblInfo2;
+        private System.Windows.Forms.Label lblInfo3;
+        private System.Windows.Forms.Label lblInfo4;
     }
 }

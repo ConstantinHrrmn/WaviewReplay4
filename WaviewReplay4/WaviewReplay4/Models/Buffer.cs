@@ -16,6 +16,7 @@ namespace WaviewReplay4
         private int _timeInSeconds;
         private int _frames;
         private int _compressionRatio;
+        private Size _outputResolution;
         
         private bool _running;
         
@@ -25,8 +26,11 @@ namespace WaviewReplay4
 
         #region Constantes publiques
         public static int DEFAULT_FPS = 25;
-        public static int DEFAULT_TIME = 8;
+        public static int DEFAULT_TIME = 5;
         public static int DEFAULT_COMPRESSION_RATIO = 4;
+
+        public static Size DISPLAY_SIZE = new Size(640, 360);
+        public static Size DEFAULT_RESOLUTION = new Size(1920, 1080);
         #endregion
 
         #region Variables publiques
@@ -37,6 +41,7 @@ namespace WaviewReplay4
         public List<Bitmap> Images { get => _images; set => _images = value; }
         public bool Running { get => _running; set => _running = value; }
         public int CompressionRatio { get => _compressionRatio; set => _compressionRatio = value; }
+        public Size OutputResolution { get => _outputResolution; set => _outputResolution = value; }
         #endregion
 
         #endregion
@@ -49,6 +54,7 @@ namespace WaviewReplay4
             this.FPS = DEFAULT_FPS;
             this.TimeInSeconds = DEFAULT_TIME;
             this.CompressionRatio = DEFAULT_COMPRESSION_RATIO;
+            this.OutputResolution = DEFAULT_RESOLUTION;
             this.Running = false;
 
             this.Frames = this.FPS * this.TimeInSeconds;
@@ -61,18 +67,22 @@ namespace WaviewReplay4
         /// Ajouter une frame dans la liste des images du buffer ainsi que des images compressées
         /// </summary>
         /// <param name="Frame">L'image à ajouter</param>
-        public void AddFrame(Bitmap Frame)
+        public void AddFrame(Bitmap Frame, Bitmap Compressed)
         {
             // SI le buffer est en train de fonctionner
             if (this.Running)
             {
                 // SI le nombre de frames dans le buffer est supérieur au nombre de frames maximum
-                if (this.Images.Count > this.Frames)
+                if (this.Images.Count >= this.Frames)
+                {
+                    
                     this.Images.RemoveAt(0);
+                    this.CompressedImages.RemoveAt(0);
+                    GC.Collect();
+                }
 
-                // On ajoute l'image au buffer
                 this.Images.Add(Frame);
-                this.CompressedImages.Add(new Bitmap(Frame, new Size(Frame.Width/this.CompressionRatio, Frame.Height/this.CompressionRatio)));
+                this.CompressedImages.Add(Compressed);  
             }
         }
 
@@ -92,6 +102,22 @@ namespace WaviewReplay4
         public void Start()
         {
             this.Running = true;
+        }
+
+        /// <summary>
+        /// Changes the Buffer and output resolution. 
+        /// ATTENTION : It clear the actual buffer
+        /// </summary>
+        /// <param name="resolution">new resolution</param>
+        /// <param name="fPS">new framerate</param>
+        public void SetOutputSettings(Size resolution, int fPS)
+        {
+            this.Images.Clear();
+            this.CompressedImages.Clear();
+
+            this.FPS = fPS;
+            this.OutputResolution = resolution;
+            this.Frames = this.FPS * this.TimeInSeconds;
         }
 
         /// <summary>
